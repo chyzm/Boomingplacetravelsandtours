@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booming Place Travels and Tours | Lagos, Nigeria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#f59e0b',
+                        accent: '#06b6d4',
+                        'primary-light': '#1e293b',
+                        'secondary-light': '#fbbf24',
+                        'accent-light': '#67e8f9'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .hero-slide {
+            transition: all 1s ease-in-out;
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 1;
+            transform: translateX(0);
+        }
+        .hero-slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(6, 182, 212, 0.3) 100%);
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.8); }
+        }
+    </style>
+</head>
+<body class="font-poppins">
+    <!-- Header/Navigation -->
+    <header class="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-accent/20">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="home.html">
+                  <img src="image/logo.png" alt="Booming Place Logo" class="w-16 h-20 md:w-20 md:h-24 mr-3 object-contain">
+                </a>
+                <div class="flex flex-col">
+                    <span class="text-xl md:text-2xl font-bold text-primary leading-tight">Booming Place</span>
+                    <span class="text-sm md:text-base text-accent font-medium -mt-1">Travels & Tours</span>
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Home</a>
+                <a href="#about" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">About</a>
+                <a href="#services" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Services</a>
+                <a href="#flights" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Flights</a>
+                <a href="#gallery" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Gallery</a>
+                <a href="#contact" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Contact</a>
+            </nav>
+            
+            <!-- Desktop Book Now Button -->
+            <div class="hidden md:flex items-center">
+                <button id="desktop-book-now" class="bg-gradient-to-r from-secondary to-secondary-light text-white px-6 py-3 rounded-full hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 font-semibold shadow-lg pulse-glow">Book Now</button>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-primary z-[70] relative">
+                <i class="fas fa-bars text-xl" id="menu-icon"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white z-[60] transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl">
+            <div class="flex flex-col h-full pt-20 px-6">
+                <nav class="flex flex-col space-y-6 mb-8">
+                    <a href="#home" class="text-primary font-semibold text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Home</a>
+                    <a href="#about" class="text-gray-700 font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">About</a>
+                    <a href="#services" class="text-gray-700 font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Services</a>
+                    <a href="#flights" class="text-gray-700 font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Flights</a>
+                    <a href="#gallery" class="text-gray-700 font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Gallery</a>
+                    <a href="#contact" class="text-gray-700 font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Contact</a>
+                </nav>
+                
+                <!-- Mobile Book Now Button -->
+                <button id="mobile-book-now" class="bg-gradient-to-r from-secondary to-secondary-light text-white px-8 py-4 rounded-full hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 font-semibold shadow-lg pulse-glow text-lg">Book Now</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen overflow-hidden">
+        <!-- Hero Slides -->
+        <div class="absolute inset-0">
+            <div class="hero-slide active bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80')">
+                <div class="absolute inset-0 gradient-overlay"></div>
+            </div>
+            <div class="hero-slide bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')">
+                <div class="absolute inset-0 gradient-overlay"></div>
+            </div>
+            <div class="hero-slide bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80')">
+                <div class="absolute inset-0 gradient-overlay"></div>
+            </div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-10 flex flex-col justify-center items-center h-full text-center text-white px-4">
+            <div class="floating-animation">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-accent-light to-secondary-light bg-clip-text text-transparent">Discover The World With Us</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-4xl leading-relaxed">Experience unforgettable journeys with Booming Place Travels and Tours. Your adventure of a lifetime starts here.</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-6 mt-8">
+                <button class="bg-gradient-to-r from-secondary to-secondary-light text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 shadow-2xl">Explore Destinations</button>
+                <button class="glass-effect text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-white/20 transition-all duration-300 transform hover:scale-105 shadow-2xl border">Book a Flight</button>
+            </div>
+        </div>
+        
+        <!-- Navigation Arrows -->
+        <button id="prevSlide" class="absolute left-6 top-1/2 transform -translate-y-1/2 z-10 glass-effect text-white p-4 rounded-full hover:bg-white/20 transition-all duration-300">
+            <i class="fas fa-chevron-left text-xl"></i>
+        </button>
+        <button id="nextSlide" class="absolute right-6 top-1/2 transform -translate-y-1/2 z-10 glass-effect text-white p-4 rounded-full hover:bg-white/20 transition-all duration-300">
+            <i class="fas fa-chevron-right text-xl"></i>
+        </button>
+        
+        <!-- Slide Indicators -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex space-x-4">
+            <button class="slide-indicator w-4 h-4 rounded-full bg-white/70 hover:bg-white transition-all duration-300 active border-2 border-secondary"></button>
+            <button class="slide-indicator w-4 h-4 rounded-full bg-white/70 hover:bg-white transition-all duration-300 border-2 border-transparent"></button>
+            <button class="slide-indicator w-4 h-4 rounded-full bg-white/70 hover:bg-white transition-all duration-300 border-2 border-transparent"></button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gradient-to-br from-white via-gray-50 to-accent/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">About Us</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Discover the story behind Nigeria's most trusted travel partner</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/2 space-y-8">
+                    <!-- <div class="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-accent/20">
+                        <h3 class="text-3xl font-bold text-secondary mb-6 flex items-center">
+                            <i class="fas fa-book-open text-secondary mr-3"></i>Our Story
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                            Booming Place Travels and Tours has been providing exceptional travel experiences since 2010. Based in the vibrant heart of Lagos, Nigeria, we've helped thousands of travelers explore both local and international destinations with ease, confidence, and unforgettable memories.
+                        </p>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            From humble beginnings as a small travel consultancy, we've grown into one of Nigeria's most trusted travel agencies, specializing in personalized service and competitive pricing.
+                        </p>
+                    </div> -->
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-white to-secondary/5 p-8 rounded-3xl shadow-2xl border-l-4 border-secondary group hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-gradient-to-br from-secondary to-secondary-light rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-bullseye text-2xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-primary mb-4">Our Mission</h4>
+                            <p class="text-gray-600 text-lg leading-relaxed">Our mission is to deliver exceptional travel and tour services through reliability, creativity, and a deep commitment to client satisfaction.</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-white to-accent/5 p-8 rounded-3xl shadow-2xl border-l-4 border-accent group hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent-light rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-eye text-2xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-primary mb-4">Our Vision</h4>
+                            <p class="text-gray-600 text-lg leading-relaxed">To be the bridge between people and their dream destinations, turning travel aspirations into reality.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stats Section -->
+                    <div class="bg-gradient-to-r from-primary to-primary-light p-8 rounded-3xl shadow-2xl text-white">
+                        <h4 class="text-2xl font-bold mb-6 text-center">Our Achievements</h4>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <div class="text-3xl font-bold text-secondary-light mb-2">15+</div>
+                                <div class="text-sm">Years Experience</div>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-accent-light mb-2">5000+</div>
+                                <div class="text-sm">Happy Travelers</div>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-secondary-light mb-2">50+</div>
+                                <div class="text-sm">Destinations</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="relative group">
+                        <!-- Main Image -->
+                        <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Professional Travel Team" 
+                                 class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 text-white">
+                                <h4 class="text-2xl font-bold mb-5 ml-5">Professional Travel Experts</h4>
+                                <!-- <p class="text-accent-light">Dedicated to making your journey extraordinary</p> -->
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Elements -->
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-secondary to-secondary-light rounded-2xl shadow-2xl flex items-center justify-center floating-animation">
+                            <i class="fas fa-plane text-white text-2xl"></i>
+                        </div>
+                        
+                        <div class="absolute -bottom-4 -left-4 w-20 h-20 mt-3 bg-gradient-to-br from-accent to-accent-light rounded-2xl shadow-2xl flex items-center justify-center floating-animation" style="animation-delay: -2s;">
+                            <i class="fas fa-globe text-white text-xl"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Awards/Certifications -->
+                    <div class="mt-8 grid grid-cols-2 gap-4">
+                        <div class="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg text-center border border-accent/20">
+                            <i class="fas fa-award text-3xl text-secondary mb-3"></i>
+                            <h5 class="font-bold text-primary mb-1">IATA Certified</h5>
+                            <p class="text-sm text-gray-600">International Air Transport Association</p>
+                        </div>
+                        <div class="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg text-center border border-accent/20">
+                            <i class="fas fa-certificate text-3xl text-accent mb-3"></i>
+                            <h5 class="font-bold text-primary mb-1">Licensed Agent</h5>
+                            <p class="text-sm text-gray-600">Nigeria Tourism Development Corporation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Our Services</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">We offer a comprehensive range of travel services to make your journey seamless and memorable.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-2xl border-t-4 border-secondary hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-secondary-light rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-plane text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Flight Bookings</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">Domestic and international flight reservations with competitive prices and flexible options.</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-2xl border-t-4 border-accent hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent-light rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-hotel text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Hotel Reservations</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">Find the perfect accommodation for your stay, from luxury resorts to budget-friendly options.</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-2xl border-t-4 border-secondary hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-secondary-light rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-passport text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Visa Assistance</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">Expert guidance and support for visa applications to various destinations worldwide.</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-2xl border-t-4 border-accent hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent-light rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-map-marked-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Tour Packages</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">Curated travel experiences including sightseeing, activities, and local cultural immersion.</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-2xl border-t-4 border-secondary hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-secondary-light rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-car text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Car Rentals</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">Convenient and reliable transportation options for your travel needs.</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-2xl border-t-4 border-accent hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent-light rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-hand-holding-usd text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Travel Insurance</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">Comprehensive coverage to protect you and your investment during your travels.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Picture Gallery Section -->
+    <section id="gallery" class="py-20 bg-gradient-to-br from-primary/5 via-accent/10 to-secondary/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Travel Gallery</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Explore breathtaking destinations and get inspired for your next adventure</p>
+            </div>
+            
+            <!-- Main Gallery Grid -->
+            <div id="main-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Santorini, Greece" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">Santorini, Greece</h3>
+                        <p class="text-accent-light">Stunning sunsets and white architecture</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maldives" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">Maldives</h3>
+                        <p class="text-accent-light">Crystal clear waters and luxury resorts</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dubai, UAE" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">Dubai, UAE</h3>
+                        <p class="text-accent-light">Modern marvels and desert adventures</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Extended Gallery (Hidden by default) -->
+            <div id="extended-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 hidden">
+                <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1502780402662-acc01917176e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Paris, France" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">Paris, France</h3>
+                        <p class="text-accent-light">City of lights and romance</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Switzerland Alps" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">Swiss Alps</h3>
+                        <p class="text-accent-light">Majestic mountains and pristine lakes</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tokyo, Japan" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">Tokyo, Japan</h3>
+                        <p class="text-accent-light">Traditional culture meets modern innovation</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bali, Indonesia" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">Bali, Indonesia</h3>
+                        <p class="text-accent-light">Tropical paradise and spiritual retreats</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="New York, USA" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">New York, USA</h3>
+                        <p class="text-accent-light">The city that never sleeps</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cape Town, South Africa" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">Cape Town, South Africa</h3>
+                        <p class="text-accent-light">Where mountains meet the ocean</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- See More Button -->
+            <div class="text-center">
+                <button id="see-more-btn" class="bg-gradient-to-r from-secondary to-secondary-light text-white px-10 py-4 rounded-full text-lg font-bold hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 shadow-2xl">
+                    <i class="fas fa-images mr-3"></i>See More Destinations
+                </button>
+                <button id="see-less-btn" class="bg-gradient-to-r from-primary to-primary-light text-white px-10 py-4 rounded-full text-lg font-bold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:scale-105 shadow-2xl hidden">
+                    <i class="fas fa-eye-slash mr-3"></i>Show Less
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flight Reservation Section -->
+    <section id="flights" class="py-20 bg-gradient-to-br from-gray-50 via-accent/5 to-secondary/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Flight Reservation</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Find the best deals for domestic and international flights with our advanced search system.</p>
+            </div>
+            
+            <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl p-8 max-w-6xl mx-auto border border-accent/20">
+                <div class="flex border-b-2 mb-8">
+                    <button id="local-tab" class="flight-tab py-4 px-8 font-bold text-primary border-b-4 border-secondary text-lg">Local Flights</button>
+                    <button id="international-tab" class="flight-tab py-4 px-8 font-semibold text-gray-500 text-lg hover:text-primary transition-all duration-300">International Flights</button>
+                </div>
+                
+                <form class="space-y-8">
+                    <!-- Trip Type Row -->
+                    <div class="bg-gradient-to-r from-primary/5 to-accent/5 p-6 rounded-2xl">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-primary font-semibold mb-3 text-lg">Trip Type</label>
+                                <select id="trip-type" class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                                    <option value="roundtrip">Round Trip</option>
+                                    <option value="oneway">One Way</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Location Fields Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-3">
+                            <label class="block text-primary font-semibold text-lg flex items-center">
+                                <i class="fas fa-plane-departure text-secondary mr-2"></i>From
+                            </label>
+                            <div class="relative">
+                                <input type="text" id="from-input" placeholder="Enter departure city or airport" 
+                                       class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg pl-12">
+                                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <div id="from-suggestions" class="absolute z-20 w-full bg-white border-2 border-accent/30 rounded-xl mt-2 hidden max-h-60 overflow-y-auto shadow-2xl"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <label class="block text-primary font-semibold text-lg flex items-center">
+                                <i class="fas fa-plane-arrival text-secondary mr-2"></i>To
+                            </label>
+                            <div class="relative">
+                                <input type="text" id="to-input" placeholder="Enter destination city or airport" 
+                                       class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg pl-12">
+                                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <div id="to-suggestions" class="absolute z-20 w-full bg-white border-2 border-accent/30 rounded-xl mt-2 hidden max-h-60 overflow-y-auto shadow-2xl"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Date Fields Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-3">
+                            <label class="block text-primary font-semibold text-lg flex items-center">
+                                <i class="fas fa-calendar-alt text-secondary mr-2"></i>Departure Date
+                            </label>
+                            <input type="date" id="departure-date" class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                        </div>
+                        
+                        <div id="return-date-field" class="space-y-3">
+                            <label class="block text-primary font-semibold text-lg flex items-center">
+                                <i class="fas fa-calendar-check text-secondary mr-2"></i>Return Date
+                            </label>
+                            <input type="date" id="return-date" class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                        </div>
+                    </div>
+                    
+                    <!-- Passengers and Class Row -->
+                    <div class="bg-gradient-to-r from-secondary/5 to-accent/5 p-6 rounded-2xl">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="space-y-3">
+                                <label class="block text-primary font-semibold text-lg flex items-center">
+                                    <i class="fas fa-user text-secondary mr-2"></i>Adults
+                                </label>
+                                <input type="number" id="adults" min="1" max="9" value="1" 
+                                       class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <label class="block text-primary font-semibold text-lg flex items-center">
+                                    <i class="fas fa-child text-secondary mr-2"></i>Children (2-12 years)
+                                </label>
+                                <input type="number" id="children" min="0" max="9" value="0" 
+                                       class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <label class="block text-primary font-semibold text-lg flex items-center">
+                                    <i class="fas fa-star text-secondary mr-2"></i>Class
+                                </label>
+                                <select class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                                    <option>Economy</option>
+                                    <option>Premium Economy</option>
+                                    <option>Business</option>
+                                    <option>First Class</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Information Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-3">
+                            <label class="block text-primary font-semibold text-lg flex items-center">
+                                <i class="fas fa-phone text-secondary mr-2"></i>Phone Number
+                            </label>
+                            <input type="tel" placeholder="+234 XXX XXX XXXX" 
+                                   class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <label class="block text-primary font-semibold text-lg flex items-center">
+                                <i class="fas fa-clipboard-list text-secondary mr-2"></i>Additional Requirements
+                            </label>
+                            <input type="text" placeholder="Special meals, wheelchair assistance, etc." 
+                                   class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center pt-8">
+                        <button type="submit" class="bg-gradient-to-r from-secondary to-secondary-light text-white px-12 py-5 rounded-full text-xl font-bold hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 shadow-2xl pulse-glow flex items-center">
+                            <i class="fas fa-search mr-3 text-xl"></i> Search Flights
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-primary mb-4">Frequently Asked Questions</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Find answers to common questions about our services and travel processes.</p>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="faq-item border-b border-gray-200 py-4">
+                    <button class="faq-question w-full flex justify-between items-center text-left font-semibold text-lg text-primary">
+                        <span>How far in advance should I book my flight?</span>
+                        <i class="fas fa-chevron-down text-secondary"></i>
+                    </button>
+                    <div class="faq-answer mt-2 text-gray-600 hidden">
+                        <p>For domestic flights, we recommend booking at least 2-3 weeks in advance for the best prices. For international travel, 2-3 months in advance is ideal, especially during peak seasons.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item border-b border-gray-200 py-4">
+                    <button class="faq-question w-full flex justify-between items-center text-left font-semibold text-lg text-primary">
+                        <span>What documents do I need for international travel?</span>
+                        <i class="fas fa-chevron-down text-secondary"></i>
+                    </button>
+                    <div class="faq-answer mt-2 text-gray-600 hidden">
+                        <p>You will need a valid passport (with at least 6 months validity), visa for your destination country, flight tickets, and any required health documents or vaccinations. Our team can assist with visa applications.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item border-b border-gray-200 py-4">
+                    <button class="faq-question w-full flex justify-between items-center text-left font-semibold text-lg text-primary">
+                        <span>Can I make changes to my booking?</span>
+                        <i class="fas fa-chevron-down text-secondary"></i>
+                    </button>
+                    <div class="faq-answer mt-2 text-gray-600 hidden">
+                        <p>Yes, changes are possible depending on the fare rules of your ticket. Please contact our customer service team as soon as possible to discuss modification options and any associated fees.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item border-b border-gray-200 py-4">
+                    <button class="faq-question w-full flex justify-between items-center text-left font-semibold text-lg text-primary">
+                        <span>Do you offer travel insurance?</span>
+                        <i class="fas fa-chevron-down text-secondary"></i>
+                    </button>
+                    <div class="faq-answer mt-2 text-gray-600 hidden">
+                        <p>Yes, we offer comprehensive travel insurance options that cover trip cancellation, medical emergencies, lost luggage, and other travel-related incidents. Our agents can help you select the right coverage for your trip.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item border-b border-gray-200 py-4">
+                    <button class="faq-question w-full flex justify-between items-center text-left font-semibold text-lg text-primary">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down text-secondary"></i>
+                    </button>
+                    <div class="faq-answer mt-2 text-gray-600 hidden">
+                        <p>We accept various payment methods including bank transfers, credit/debit cards, and online payment platforms. Installment payment options are also available for certain packages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-gray-50 via-accent/5 to-secondary/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Visit Our Office</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Find us at our Lagos office or get in touch through various channels</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div>
+                    <div class="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-accent/20">
+                        <h3 class="text-3xl font-bold text-primary mb-8">Get In Touch</h3>
+                        
+                        <div class="space-y-8">
+                            <div class="flex items-start group">
+                                <div class="w-14 h-14 bg-gradient-to-br from-secondary to-secondary-light rounded-2xl flex items-center justify-center text-white mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-xl text-primary mb-2">Address</h4>
+                                    <p class="text-gray-600 text-lg">Unity Estate, 1 Joseph Orru Street, Amuwo-origin GRA, Lagos.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start group">
+                                <div class="w-14 h-14 bg-gradient-to-br from-accent to-accent-light rounded-2xl flex items-center justify-center text-white mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <i class="fas fa-phone-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-xl text-primary mb-2">Phone</h4>
+                                    <p class="text-gray-600 text-lg"><a href="tel:+2349065212188" class="text-gray-600">+234 906 521 2188</a></p>   
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start group">
+                                <div class="w-14 h-14 bg-gradient-to-br from-primary to-primary-light rounded-2xl flex items-center justify-center text-white mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-xl text-primary mb-2">Email</h4>
+                                    <p class="text-gray-600 text-lg"><a href="mailto:info@boomingplacetravelsandtours.com" class="text-gray-600">info@boomingplacetravelsandtours.com</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start group">
+                                <div class="w-14 h-14 bg-gradient-to-br from-secondary to-accent rounded-2xl flex items-center justify-center text-white mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <i class="fas fa-clock text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-xl text-primary mb-2">Business Hours</h4>
+                                    <p class="text-gray-600 text-lg">Monday - Friday: 8:00 AM - 6:00 PM</p>
+                                    <p class="text-gray-600 text-lg">Saturday: 9:00 AM - 4:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                            <h4 class="font-bold text-xl text-primary mb-6">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://web.facebook.com/people/Boomingplace-travels-and-tour/100064488411169/" class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 bg-gradient-to-br from-gray-800 to-black rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                    </svg>
+                                </a>
+                                <a href="https://www.instagram.com/boomingplace/" class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 bg-gradient-to-br from-blue-700 to-blue-800 rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl h-full border border-accent/20">
+                        <h3 class="text-3xl font-bold text-primary mb-8 text-center">Our Location</h3>
+                        
+                        <!-- Google Map Embed -->
+                        <div class="w-full h-96 rounded-2xl overflow-hidden shadow-lg mb-6">
+
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.408000886021!2d3.300513374752765!3d6.469889993521823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b89266e561c1d%3A0x4a26f958084fae58!2sBooming%20Place%20Travels%20%26%20Tours%20Ltd!5e0!3m2!1sen!2sng!4v1759540245737!5m2!1sen!2sng" 
+                                 width="600" 
+                                 height="450" 
+                                 style="border:0;" 
+                                 allowfullscreen="" 
+                                 loading="lazy" 
+                                 referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        
+                        <!-- Quick Contact Actions -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <a href="tel:+2349065212188" class="bg-gradient-to-r from-secondary to-secondary-light text-white p-4 rounded-xl text-center font-semibold hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center">
+                                <i class="fas fa-phone mr-3"></i>Call Us Now
+                            </a>
+                            <a href="mailto:info@boomingplacetravelsandtours.com" class="bg-gradient-to-r from-accent to-accent-light text-white p-4 rounded-xl text-center font-semibold hover:from-accent-light hover:to-accent transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center">
+                                <i class="fas fa-envelope mr-3"></i>Email Us
+                            </a>
+                        </div>
+                        
+                        <!-- Get Directions Button -->
+                        <div class="mt-6">
+                            <a href="https://maps.app.goo.gl/QrzNZjQV6VX7TmjdA" target="_blank" class="bg-gradient-to-r from-primary to-primary-light text-white px-6 py-4 rounded-xl font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:scale-105 shadow-lg w-full flex items-center justify-center">
+                                <i class="fas fa-directions mr-3"></i>Get Directions
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
+            <p class="text-xl max-w-2xl mx-auto mb-8">Let us help you plan the perfect trip. Contact us today for personalized travel solutions.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-secondary text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-opacity-90 transition">Book a Consultation</button>
+                <button class="bg-white text-primary px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition">Call Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg mr-2">
+                           <a href="home.html">
+                            <img src="image/logo.png" alt="Booming Place Logo" class="w-16 h-20 md:w-20 md:h-24 mr-3 object-contain">
+                           </a>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xl font-bold">Booming Place</span>
+                            <span class="text-xs text-gray-400 -mt-1">Travels & Tours</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted travel partner in Lagos, Nigeria, providing exceptional travel experiences since 2010.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition mt-1">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#flights" class="text-gray-400 hover:text-white transition">Flight Booking</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Flight Bookings</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Hotel Reservations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Visa Assistance</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Tour Packages</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for travel tips and exclusive deals.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-secondary text-white px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Booming Place Travels and Tours. All rights reserved.</p>
+                <p> Designed by Duriel Tech</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hero Slider Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.slide-indicator');
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            function showSlide(n) {
+                // Remove active and prev classes from all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active', 'prev');
+                });
+                indicators.forEach(indicator => {
+                    indicator.classList.remove('active', 'border-secondary');
+                    indicator.classList.add('border-transparent');
+                });
+                
+                // Update current slide index
+                currentSlide = (n + slides.length) % slides.length;
+                
+                // Add active class to current slide and indicator
+                slides[currentSlide].classList.add('active');
+                indicators[currentSlide].classList.add('active', 'border-secondary');
+                indicators[currentSlide].classList.remove('border-transparent');
+            }
+            
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+            
+            function prevSlide() {
+                showSlide(currentSlide - 1);
+            }
+            
+            // Auto slide functionality
+            function startAutoSlide() {
+                slideInterval = setInterval(nextSlide, 6000);
+            }
+            
+            function stopAutoSlide() {
+                clearInterval(slideInterval);
+            }
+            
+            // Event listeners
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                stopAutoSlide();
+                startAutoSlide(); // Restart auto slide
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                stopAutoSlide();
+                startAutoSlide(); // Restart auto slide
+            });
+            
+            // Manual slide controls
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    showSlide(index);
+                    stopAutoSlide();
+                    startAutoSlide(); // Restart auto slide
+                });
+            });
+            
+            // Start auto slide
+            startAutoSlide();
+            
+            // Gallery functionality
+            const seeMoreBtn = document.getElementById('see-more-btn');
+            const seeLessBtn = document.getElementById('see-less-btn');
+            const extendedGallery = document.getElementById('extended-gallery');
+            
+            seeMoreBtn.addEventListener('click', () => {
+                extendedGallery.classList.remove('hidden');
+                seeMoreBtn.classList.add('hidden');
+                seeLessBtn.classList.remove('hidden');
+                
+                // Smooth scroll to extended gallery
+                extendedGallery.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+            
+            seeLessBtn.addEventListener('click', () => {
+                extendedGallery.classList.add('hidden');
+                seeLessBtn.classList.add('hidden');
+                seeMoreBtn.classList.remove('hidden');
+                
+                // Scroll back to main gallery
+                document.getElementById('main-gallery').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+            
+            // FAQ Accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('i');
+                    
+                    if (answer.classList.contains('hidden')) {
+                        answer.classList.remove('hidden');
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        answer.classList.add('hidden');
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+            
+            // Flight Reservation Functionality
+            const localTab = document.getElementById('local-tab');
+            const internationalTab = document.getElementById('international-tab');
+            const tripTypeSelect = document.getElementById('trip-type');
+            const returnDateField = document.getElementById('return-date-field');
+            const fromInput = document.getElementById('from-input');
+            const toInput = document.getElementById('to-input');
+            const fromSuggestions = document.getElementById('from-suggestions');
+            const toSuggestions = document.getElementById('to-suggestions');
+            
+            let isInternational = false;
+            
+            // Airport/City data
+            const domesticCities = [
+                { code: 'LOS', name: 'Lagos', airport: 'Murtala Muhammed International Airport' },
+                { code: 'ABV', name: 'Abuja', airport: 'Nnamdi Azikiwe International Airport' },
+                { code: 'PHC', name: 'Port Harcourt', airport: 'Port Harcourt International Airport' },
+                { code: 'KAN', name: 'Kano', airport: 'Mallam Aminu Kano International Airport' },
+                { code: 'ENU', name: 'Enugu', airport: 'Akanu Ibiam International Airport' },
+                { code: 'ILR', name: 'Ilorin', airport: 'Ilorin International Airport' },
+                { code: 'CBQ', name: 'Calabar', airport: 'Margaret Ekpo International Airport' },
+                { code: 'YOL', name: 'Yola', airport: 'Yola Airport' },
+                { code: 'MIU', name: 'Maiduguri', airport: 'Maiduguri International Airport' },
+                { code: 'JOS', name: 'Jos', airport: 'Yakubu Gowon Airport' },
+                { code: 'SKO', name: 'Sokoto', airport: 'Sultan Abubakar III International Airport' },
+                { code: 'MXJ', name: 'Minna', airport: 'Minna Airport' },
+                { code: 'QOW', name: 'Owerri', airport: 'Sam Mbakwe International Cargo Airport' },
+                { code: 'QUO', name: 'Akure', airport: 'Akure Airport' },
+                { code: 'BNI', name: 'Benin City', airport: 'Benin Airport' },
+                { code: 'KAD', name: 'Kaduna', airport: 'Kaduna Airport' },
+                { code: 'GMO', name: 'Gombe', airport: 'Gombe Lawanti International Airport' },
+                { code: 'ZAR', name: 'Zaria', airport: 'Zaria Airport' },
+                { code: 'UMU', name: 'Anambra', airport: 'Anambra International Cargo and Passenger Airport' },
+                { code: 'ABB', name: 'Asaba', airport: 'Asaba International Airport' },
+                { code: 'QUO', name: 'Uyo', airport: 'Victor Attah International Airport' },
+                { code: 'QRW', name: 'Warri', airport: 'Osubi Airstrip' },
+                { code: 'AKR', name: 'Akure', airport: 'Akure Airport' },
+                { code: 'IBA', name: 'Ibadan', airport: 'Ibadan Airport' },
+                { code: 'GUS', name: 'Gusau', airport: 'Gusau Airport' },
+                { code: 'BCU', name: 'Bauchi', airport: 'Bauchi Airport' },
+                { code: 'JEG', name: 'Jega', airport: 'Jega Airport' },
+                { code: 'DNM', name: 'Dinami', airport: 'Dinami Airport' }
+            ];
+            
+            const internationalCities = [
+                // Nigerian International Airports
+                { code: 'LOS', name: 'Lagos', airport: 'Murtala Muhammed International Airport', country: 'Nigeria' },
+                { code: 'ABV', name: 'Abuja', airport: 'Nnamdi Azikiwe International Airport', country: 'Nigeria' },
+                { code: 'PHC', name: 'Port Harcourt', airport: 'Port Harcourt International Airport', country: 'Nigeria' },
+                { code: 'KAN', name: 'Kano', airport: 'Mallam Aminu Kano International Airport', country: 'Nigeria' },
+                { code: 'ENU', name: 'Enugu', airport: 'Akanu Ibiam International Airport', country: 'Nigeria' },
+                { code: 'CBQ', name: 'Calabar', airport: 'Margaret Ekpo International Airport', country: 'Nigeria' },
+                { code: 'SKO', name: 'Sokoto', airport: 'Sultan Abubakar III International Airport', country: 'Nigeria' },
+                
+                // Europe
+                { code: 'LHR', name: 'London', airport: 'Heathrow Airport', country: 'United Kingdom' },
+                { code: 'LGW', name: 'London Gatwick', airport: 'Gatwick Airport', country: 'United Kingdom' },
+                { code: 'MAN', name: 'Manchester', airport: 'Manchester Airport', country: 'United Kingdom' },
+                { code: 'CDG', name: 'Paris', airport: 'Charles de Gaulle Airport', country: 'France' },
+                { code: 'FRA', name: 'Frankfurt', airport: 'Frankfurt Airport', country: 'Germany' },
+                { code: 'MUC', name: 'Munich', airport: 'Munich Airport', country: 'Germany' },
+                { code: 'AMS', name: 'Amsterdam', airport: 'Amsterdam Airport Schiphol', country: 'Netherlands' },
+                { code: 'FCO', name: 'Rome', airport: 'Leonardo da Vinci International Airport', country: 'Italy' },
+                { code: 'MXP', name: 'Milan', airport: 'Malpensa Airport', country: 'Italy' },
+                { code: 'MAD', name: 'Madrid', airport: 'Adolfo Suárez Madrid–Barajas Airport', country: 'Spain' },
+                { code: 'BCN', name: 'Barcelona', airport: 'Barcelona–El Prat Airport', country: 'Spain' },
+                { code: 'ZUR', name: 'Zurich', airport: 'Zurich Airport', country: 'Switzerland' },
+                { code: 'VIE', name: 'Vienna', airport: 'Vienna International Airport', country: 'Austria' },
+                { code: 'BRU', name: 'Brussels', airport: 'Brussels Airport', country: 'Belgium' },
+                { code: 'CPH', name: 'Copenhagen', airport: 'Copenhagen Airport', country: 'Denmark' },
+                { code: 'OSL', name: 'Oslo', airport: 'Oslo Airport', country: 'Norway' },
+                { code: 'ARN', name: 'Stockholm', airport: 'Stockholm Arlanda Airport', country: 'Sweden' },
+                { code: 'IST', name: 'Istanbul', airport: 'Istanbul Airport', country: 'Turkey' },
+                
+                // North America
+                { code: 'JFK', name: 'New York', airport: 'John F. Kennedy International Airport', country: 'United States' },
+                { code: 'LAX', name: 'Los Angeles', airport: 'Los Angeles International Airport', country: 'United States' },
+                { code: 'ATL', name: 'Atlanta', airport: 'Hartsfield-Jackson Atlanta International Airport', country: 'United States' },
+                { code: 'IAH', name: 'Houston', airport: 'George Bush Intercontinental Airport', country: 'United States' },
+                { code: 'ORD', name: 'Chicago', airport: 'O\'Hare International Airport', country: 'United States' },
+                { code: 'DCA', name: 'Washington DC', airport: 'Ronald Reagan Washington National Airport', country: 'United States' },
+                { code: 'MIA', name: 'Miami', airport: 'Miami International Airport', country: 'United States' },
+                { code: 'YYZ', name: 'Toronto', airport: 'Toronto Pearson International Airport', country: 'Canada' },
+                { code: 'YVR', name: 'Vancouver', airport: 'Vancouver International Airport', country: 'Canada' },
+                
+                // Middle East
+                { code: 'DXB', name: 'Dubai', airport: 'Dubai International Airport', country: 'UAE' },
+                { code: 'AUH', name: 'Abu Dhabi', airport: 'Abu Dhabi International Airport', country: 'UAE' },
+                { code: 'DOH', name: 'Doha', airport: 'Hamad International Airport', country: 'Qatar' },
+                { code: 'RUH', name: 'Riyadh', airport: 'King Khalid International Airport', country: 'Saudi Arabia' },
+                { code: 'JED', name: 'Jeddah', airport: 'King Abdulaziz International Airport', country: 'Saudi Arabia' },
+                { code: 'KWI', name: 'Kuwait City', airport: 'Kuwait International Airport', country: 'Kuwait' },
+                { code: 'BEY', name: 'Beirut', airport: 'Rafic Hariri International Airport', country: 'Lebanon' },
+                
+                // Asia
+                { code: 'BOM', name: 'Mumbai', airport: 'Chhatrapati Shivaji Maharaj International Airport', country: 'India' },
+                { code: 'DEL', name: 'New Delhi', airport: 'Indira Gandhi International Airport', country: 'India' },
+                { code: 'PEK', name: 'Beijing', airport: 'Beijing Capital International Airport', country: 'China' },
+                { code: 'PVG', name: 'Shanghai', airport: 'Shanghai Pudong International Airport', country: 'China' },
+                { code: 'NRT', name: 'Tokyo', airport: 'Narita International Airport', country: 'Japan' },
+                { code: 'SIN', name: 'Singapore', airport: 'Singapore Changi Airport', country: 'Singapore' },
+                { code: 'KUL', name: 'Kuala Lumpur', airport: 'Kuala Lumpur International Airport', country: 'Malaysia' },
+                { code: 'BKK', name: 'Bangkok', airport: 'Suvarnabhumi Airport', country: 'Thailand' },
+                
+                // Africa
+                { code: 'CAI', name: 'Cairo', airport: 'Cairo International Airport', country: 'Egypt' },
+                { code: 'CMN', name: 'Casablanca', airport: 'Mohammed V International Airport', country: 'Morocco' },
+                { code: 'TUN', name: 'Tunis', airport: 'Tunis Carthage International Airport', country: 'Tunisia' },
+                { code: 'ALG', name: 'Algiers', airport: 'Houari Boumediene Airport', country: 'Algeria' },
+                { code: 'JNB', name: 'Johannesburg', airport: 'O.R. Tambo International Airport', country: 'South Africa' },
+                { code: 'CPT', name: 'Cape Town', airport: 'Cape Town International Airport', country: 'South Africa' },
+                { code: 'DUR', name: 'Durban', airport: 'King Shaka International Airport', country: 'South Africa' },
+                { code: 'ADD', name: 'Addis Ababa', airport: 'Bole International Airport', country: 'Ethiopia' },
+                { code: 'NBO', name: 'Nairobi', airport: 'Jomo Kenyatta International Airport', country: 'Kenya' },
+                { code: 'DAR', name: 'Dar es Salaam', airport: 'Julius Nyerere International Airport', country: 'Tanzania' },
+                { code: 'KGL', name: 'Kigali', airport: 'Kigali International Airport', country: 'Rwanda' },
+                { code: 'EBB', name: 'Entebbe', airport: 'Entebbe International Airport', country: 'Uganda' },
+                { code: 'LUN', name: 'Lusaka', airport: 'Kenneth Kaunda International Airport', country: 'Zambia' },
+                { code: 'HRE', name: 'Harare', airport: 'Robert Gabriel Mugabe International Airport', country: 'Zimbabwe' },
+                { code: 'WDH', name: 'Windhoek', airport: 'Hosea Kutako International Airport', country: 'Namibia' },
+                { code: 'ACC', name: 'Accra', airport: 'Kotoka International Airport', country: 'Ghana' },
+                { code: 'ABJ', name: 'Abidjan', airport: 'Félix-Houphouët-Boigny International Airport', country: 'Ivory Coast' },
+                { code: 'DKR', name: 'Dakar', airport: 'Blaise Diagne International Airport', country: 'Senegal' },
+                { code: 'CKY', name: 'Conakry', airport: 'Conakry International Airport', country: 'Guinea' },
+                { code: 'FNA', name: 'Freetown', airport: 'Lungi International Airport', country: 'Sierra Leone' },
+                { code: 'LFW', name: 'Lome', airport: 'Gnassingbé Eyadéma International Airport', country: 'Togo' },
+                { code: 'COO', name: 'Cotonou', airport: 'Cadjehoun Airport', country: 'Benin' },
+                { code: 'OUA', name: 'Ouagadougou', airport: 'Ouagadougou Airport', country: 'Burkina Faso' },
+                { code: 'BAK', name: 'Bamako', airport: 'Modibo Keita International Airport', country: 'Mali' },
+                { code: 'NKC', name: 'Nouakchott', airport: 'Nouakchott–Oumtounsy International Airport', country: 'Mauritania' },
+                { code: 'MRU', name: 'Mauritius', airport: 'Sir Seewoosagur Ramgoolam International Airport', country: 'Mauritius' },
+                
+                // Other Popular Destinations
+                { code: 'SYD', name: 'Sydney', airport: 'Kingsford Smith Airport', country: 'Australia' },
+                { code: 'MEL', name: 'Melbourne', airport: 'Melbourne Airport', country: 'Australia' },
+                { code: 'GRU', name: 'São Paulo', airport: 'São Paulo/Guarulhos International Airport', country: 'Brazil' },
+                { code: 'GIG', name: 'Rio de Janeiro', airport: 'Rio de Janeiro–Galeão International Airport', country: 'Brazil' }
+            ];
+            
+            // Flight Tabs
+            function switchToLocal() {
+                isInternational = false;
+                localTab.classList.add('text-primary', 'border-b-4', 'border-secondary', 'font-bold');
+                localTab.classList.remove('text-gray-500', 'font-semibold');
+                internationalTab.classList.remove('text-primary', 'border-b-4', 'border-secondary', 'font-bold');
+                internationalTab.classList.add('text-gray-500', 'font-semibold');
+                
+                // Clear inputs when switching
+                fromInput.value = '';
+                toInput.value = '';
+                hideSuggestions();
+            }
+            
+            function switchToInternational() {
+                isInternational = true;
+                internationalTab.classList.add('text-primary', 'border-b-4', 'border-secondary', 'font-bold');
+                internationalTab.classList.remove('text-gray-500', 'font-semibold');
+                localTab.classList.remove('text-primary', 'border-b-4', 'border-secondary', 'font-bold');
+                localTab.classList.add('text-gray-500', 'font-semibold');
+                
+                // Clear inputs when switching
+                fromInput.value = '';
+                toInput.value = '';
+                hideSuggestions();
+            }
+            
+            localTab.addEventListener('click', switchToLocal);
+            internationalTab.addEventListener('click', switchToInternational);
+            
+            // Trip Type functionality
+            tripTypeSelect.addEventListener('change', function() {
+                if (this.value === 'oneway') {
+                    returnDateField.style.display = 'none';
+                } else {
+                    returnDateField.style.display = 'block';
+                }
+            });
+            
+            // Searchable airport/city functionality
+            function filterCities(query, cities) {
+                return cities.filter(city => 
+                    city.name.toLowerCase().includes(query.toLowerCase()) ||
+                    city.code.toLowerCase().includes(query.toLowerCase()) ||
+                    city.airport.toLowerCase().includes(query.toLowerCase()) ||
+                    (city.country && city.country.toLowerCase().includes(query.toLowerCase()))
+                );
+            }
+            
+            function showSuggestions(input, suggestionsDiv, cities) {
+                const query = input.value.trim();
+                if (query.length < 2) {
+                    hideSuggestions();
+                    return;
+                }
+                
+                const filtered = filterCities(query, cities);
+                suggestionsDiv.innerHTML = '';
+                
+                if (filtered.length > 0) {
+                    filtered.slice(0, 8).forEach(city => {
+                        const div = document.createElement('div');
+                        div.className = 'p-3 hover:bg-gray-100 cursor-pointer border-b border-gray-200 last:border-b-0';
+                        div.innerHTML = `
+                            <div class="font-semibold">${city.name} (${city.code})</div>
+                            <div class="text-sm text-gray-600">${city.airport}${city.country ? ', ' + city.country : ''}</div>
+                        `;
+                        div.addEventListener('click', () => {
+                            input.value = `${city.name} (${city.code})`;
+                            hideSuggestions();
+                        });
+                        suggestionsDiv.appendChild(div);
+                    });
+                    suggestionsDiv.classList.remove('hidden');
+                } else {
+                    suggestionsDiv.innerHTML = '<div class="p-3 text-gray-500">No cities found</div>';
+                    suggestionsDiv.classList.remove('hidden');
+                }
+            }
+            
+            function hideSuggestions() {
+                fromSuggestions.classList.add('hidden');
+                toSuggestions.classList.add('hidden');
+            }
+            
+            // Event listeners for search inputs
+            fromInput.addEventListener('input', function() {
+                const cities = isInternational ? internationalCities : domesticCities;
+                showSuggestions(this, fromSuggestions, cities);
+            });
+            
+            toInput.addEventListener('input', function() {
+                const cities = isInternational ? internationalCities : domesticCities;
+                showSuggestions(this, toSuggestions, cities);
+            });
+            
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('#from-input') && !event.target.closest('#from-suggestions')) {
+                    fromSuggestions.classList.add('hidden');
+                }
+                if (!event.target.closest('#to-input') && !event.target.closest('#to-suggestions')) {
+                    toSuggestions.classList.add('hidden');
+                }
+            });
+            
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('departure-date').min = today;
+            document.getElementById('return-date').min = today;
+            
+            // Update return date minimum when departure date changes
+            document.getElementById('departure-date').addEventListener('change', function() {
+                document.getElementById('return-date').min = this.value;
+            });
+            
+            // Navigation scroll highlighting
+            function updateActiveNavigation() {
+                const sections = ['home', 'about', 'services', 'flights', 'gallery', 'contact'];
+                const desktopNavLinks = document.querySelectorAll('nav.hidden a'); // Desktop nav only
+                const mobileNavLinks = document.querySelectorAll('#mobile-menu nav a'); // Mobile nav only
+                let currentSection = 'home';
+                
+                // Get scroll position
+                const scrollPosition = window.scrollY + 100; // Add offset for header
+                
+                // Find the current section based on scroll position
+                sections.forEach(sectionId => {
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.offsetHeight;
+                        
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                            currentSection = sectionId;
+                        }
+                    }
+                });
+                
+                // Update desktop navigation links
+                desktopNavLinks.forEach(link => {
+                    const href = link.getAttribute('href').substring(1); // Remove #
+                    if (href === currentSection) {
+                        // Active state
+                        link.classList.remove('text-gray-700', 'font-medium', 'hover:border-b-2', 'hover:border-secondary', 'pb-1');
+                        link.classList.add('text-primary', 'font-semibold', 'border-b-2', 'border-secondary');
+                    } else {
+                        // Inactive state
+                        link.classList.remove('text-primary', 'font-semibold', 'border-b-2', 'border-secondary');
+                        link.classList.add('text-gray-700', 'font-medium', 'hover:border-b-2', 'hover:border-secondary', 'pb-1');
+                    }
+                });
+                
+                // Update mobile navigation links
+                mobileNavLinks.forEach(link => {
+                    const href = link.getAttribute('href').substring(1); // Remove #
+                    if (href === currentSection) {
+                        // Active state for mobile
+                        link.classList.remove('text-gray-700', 'font-medium');
+                        link.classList.add('text-primary', 'font-semibold');
+                    } else {
+                        // Inactive state for mobile
+                        link.classList.remove('text-primary', 'font-semibold');
+                        link.classList.add('text-gray-700', 'font-medium');
+                    }
+                });
+            }
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', updateActiveNavigation);
+            
+            // Initial call to set active navigation
+            updateActiveNavigation();
+            
+            // Add click handlers for immediate navigation highlighting
+            function addNavigationClickHandlers() {
+                const allNavLinks = document.querySelectorAll('nav a, #mobile-menu nav a');
+                
+                allNavLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        const targetId = this.getAttribute('href').substring(1);
+                        const targetSection = document.getElementById(targetId);
+                        
+                        if (targetSection) {
+                            // Immediately update active state
+                            updateActiveNavigationForSection(targetId);
+                            
+                            // Smooth scroll to section
+                            e.preventDefault();
+                            targetSection.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                            
+                            // Update again after scroll completes
+                            setTimeout(() => {
+                                updateActiveNavigation();
+                            }, 1000);
+                        }
+                    });
+                });
+            }
+            
+            // Function to update navigation for a specific section
+            function updateActiveNavigationForSection(sectionId) {
+                const desktopNavLinks = document.querySelectorAll('nav.hidden a');
+                const mobileNavLinks = document.querySelectorAll('#mobile-menu nav a');
+                
+                // Update desktop navigation links
+                desktopNavLinks.forEach(link => {
+                    const href = link.getAttribute('href').substring(1);
+                    if (href === sectionId) {
+                        link.classList.remove('text-gray-700', 'font-medium', 'hover:border-b-2', 'hover:border-secondary', 'pb-1');
+                        link.classList.add('text-primary', 'font-semibold', 'border-b-2', 'border-secondary');
+                    } else {
+                        link.classList.remove('text-primary', 'font-semibold', 'border-b-2', 'border-secondary');
+                        link.classList.add('text-gray-700', 'font-medium', 'hover:border-b-2', 'hover:border-secondary', 'pb-1');
+                    }
+                });
+                
+                // Update mobile navigation links
+                mobileNavLinks.forEach(link => {
+                    const href = link.getAttribute('href').substring(1);
+                    if (href === sectionId) {
+                        link.classList.remove('text-gray-700', 'font-medium');
+                        link.classList.add('text-primary', 'font-semibold');
+                    } else {
+                        link.classList.remove('text-primary', 'font-semibold');
+                        link.classList.add('text-gray-700', 'font-medium');
+                    }
+                });
+            }
+            
+            // Initialize click handlers
+            addNavigationClickHandlers();
+            
+            // Book Now button functionality
+            function addBookNowClickHandlers() {
+                const desktopBookNow = document.getElementById('desktop-book-now');
+                const mobileBookNow = document.getElementById('mobile-book-now');
+                const flightsSection = document.getElementById('flights');
+                
+                function scrollToFlights() {
+                    if (flightsSection) {
+                        // Update navigation highlighting immediately
+                        updateActiveNavigationForSection('flights');
+                        
+                        // Smooth scroll to flights section
+                        flightsSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Update navigation again after scroll completes
+                        setTimeout(() => {
+                            updateActiveNavigation();
+                        }, 1000);
+                    }
+                }
+                
+                // Add click handlers for both buttons
+                if (desktopBookNow) {
+                    desktopBookNow.addEventListener('click', scrollToFlights);
+                }
+                
+                if (mobileBookNow) {
+                    mobileBookNow.addEventListener('click', (e) => {
+                        // Close mobile menu if it's open
+                        if (isMenuOpen) {
+                            toggleMobileMenu();
+                        }
+                        scrollToFlights();
+                    });
+                }
+            }
+            
+            // Initialize Book Now handlers
+            addBookNowClickHandlers();
+            
+            // Mobile Menu Functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const mobileNavLinks = document.querySelectorAll('#mobile-menu nav a');
+            
+            let isMenuOpen = false;
+            
+            function toggleMobileMenu() {
+                isMenuOpen = !isMenuOpen;
+                
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('translate-x-full');
+                    mobileMenu.classList.add('translate-x-0');
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                } else {
+                    mobileMenu.classList.remove('translate-x-0');
+                    mobileMenu.classList.add('translate-x-full');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            }
+            
+            // Toggle menu when button is clicked
+            mobileMenuButton.addEventListener('click', toggleMobileMenu);
+            
+            // Close menu when clicking on navigation links
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+            
+            // Close menu when clicking outside (on the backdrop)
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target === mobileMenu && isMenuOpen) {
+                    toggleMobileMenu();
+                }
+            });
+            
+            // Handle window resize - close mobile menu if screen becomes large
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768 && isMenuOpen) { // md breakpoint
+                    toggleMobileMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
