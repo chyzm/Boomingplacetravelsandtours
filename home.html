@@ -85,6 +85,12 @@
             font-family: 'Poppins', sans-serif;
         }
         .hero-slide {
+            position: absolute;
+            inset: 0; /* Fill the slides wrapper */
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
             transition: all 1s ease-in-out;
             transform: translateX(100%);
             opacity: 0;
@@ -125,6 +131,39 @@
         @keyframes pulse-glow {
             0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.4); }
             50% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.8); }
+        }
+        
+        /* Testimonials Slider Styles */
+        .testimonials-track {
+            /* Width is auto based on children; we translate in px for 1-per-slide */
+            will-change: transform;
+        }
+        .testimonial-slide {
+            flex: 0 0 100%; /* One full-width slide per view */
+            box-sizing: border-box; /* Include padding within width */
+            padding-top: 2rem; /* Space for floating quote icon so it isn't clipped */
+        }
+        .testimonial-indicator.active-indicator {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+        }
+        
+        /* Testimonial card hover effects */
+        .testimonial-slide .bg-white\/90 {
+            transition: all 0.3s ease;
+        }
+        .testimonial-slide:hover .bg-white\/90 {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Quote animation */
+        .fa-quote-left {
+            animation: quote-pulse 2s infinite ease-in-out;
+        }
+        @keyframes quote-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
     </style>
     
@@ -225,11 +264,11 @@
 <body class="font-poppins">
     <!-- Header/Navigation -->
     <header class="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-accent/20">
-        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+        <div class="container mx-auto px-4 py-1 flex justify-between items-center">
             <div class="flex items-center">
-                <a href="home.html">
-                  <img src="image/logo.png" alt="Booming Place Logo" class="w-16 h-20 md:w-20 md:h-24 mr-3 object-contain">
-                </a>
+                                <a href="home.html">
+                                    <img src="image/logo.png" alt="Booming Place Logo" class="w-20 h-24 md:w-24 md:h-28 mr-3 object-contain">
+                                </a>
                 <div class="flex flex-col">
                     <span class="text-xl md:text-2xl font-bold text-primary leading-tight">Booming Place</span>
                     <span class="text-sm md:text-base text-accent font-medium -mt-1">Travels & Tours</span>
@@ -258,15 +297,19 @@
         </div>
         
         <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white z-[60] transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl">
+    <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white bg-opacity-100 z-[1000] transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl">
+            <!-- In-overlay Close Button -->
+            <button id="mobile-menu-close" class="absolute top-4 right-4 text-primary p-3 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-secondary z-[1100]" aria-label="Close menu">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
             <div class="flex flex-col h-full pt-20 px-6">
-                <nav class="flex flex-col space-y-6 mb-8">
+                <nav class="flex flex-col space-y-4 mb-8">
                     <a href="#home" class="text-primary font-semibold text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Home</a>
-                    <a href="#about" class="text-gray-700 font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">About</a>
-                    <a href="#services" class="text-gray-700 font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Services</a>
-                    <a href="#flights" class="text-gray-700 font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Flights</a>
-                    <a href="#gallery" class="text-gray-700 font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Gallery</a>
-                    <a href="#contact" class="text-gray-700 font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Contact</a>
+                    <a href="#about" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">About</a>
+                    <a href="#services" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Services</a>
+                    <a href="#flights" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Flights</a>
+                    <a href="#gallery" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Gallery</a>
+                    <a href="#contact" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Contact</a>
                 </nav>
                 
                 <!-- Mobile Book Now Button -->
@@ -279,13 +322,13 @@
     <section id="home" class="relative h-screen overflow-hidden">
         <!-- Hero Slides -->
         <div class="absolute inset-0">
-            <div class="hero-slide active bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80')">
+            <div class="hero-slide active bg-cover bg-center" style="background-image: url('image/hero_1.jpg')">
                 <div class="absolute inset-0 gradient-overlay"></div>
             </div>
-            <div class="hero-slide bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')">
+            <div class="hero-slide bg-cover bg-center" style="background-image: url('image/hero_2.jpg')">
                 <div class="absolute inset-0 gradient-overlay"></div>
             </div>
-            <div class="hero-slide bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80')">
+            <div class="hero-slide bg-cover bg-center" style="background-image: url('image/hero_3.jpg')">
                 <div class="absolute inset-0 gradient-overlay"></div>
             </div>
         </div>
@@ -296,18 +339,18 @@
                 <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-accent-light to-secondary-light bg-clip-text text-transparent">Discover The World With Us</h1>
                 <p class="text-xl md:text-2xl mb-8 max-w-4xl leading-relaxed">Experience unforgettable journeys with Booming Place Travels and Tours. Your adventure of a lifetime starts here.</p>
             </div>
-            <div class="flex flex-col sm:flex-row gap-6 mt-8">
-                <button class="bg-gradient-to-r from-secondary to-secondary-light text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 shadow-2xl">Explore Destinations</button>
-                <button class="glass-effect text-gray-600 px-10 py-4 rounded-full text-lg font-semibold hover:bg-white/20 transition-all duration-300 transform hover:scale-105 shadow-2xl border">Book a Flight</button>
-            </div>
+                <div class="flex flex-col sm:flex-row gap-6 mt-8">
+                    <a href="#gallery" class="inline-block bg-gradient-to-r from-secondary to-secondary-light text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 shadow-2xl">Explore Destinations</a>
+                    <a href="#flights" class="inline-block glass-effect text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-white/20 transition-all duration-300 transform hover:scale-105 shadow-2xl border">Book a Flight</a>
+                </div>
         </div>
         
         <!-- Navigation Arrows -->
-        <button id="prevSlide" class="absolute left-6 top-1/2 transform -translate-y-1/2 z-10 glass-effect text-white p-4 rounded-full hover:bg-white/20 transition-all duration-300">
-            <i class="fas fa-chevron-left text-xl"></i>
+        <button id="prevSlide" class="absolute left-3 md:left-6 top-[60%] md:top-1/2 transform -translate-y-1/2 z-10 glass-effect text-white p-2 md:p-4 rounded-full hover:bg-white/20 transition-all duration-300 opacity-70 md:opacity-100">
+            <i class="fas fa-chevron-left text-base md:text-xl"></i>
         </button>
-        <button id="nextSlide" class="absolute right-6 top-1/2 transform -translate-y-1/2 z-10 glass-effect text-white p-4 rounded-full hover:bg-white/20 transition-all duration-300">
-            <i class="fas fa-chevron-right text-xl"></i>
+        <button id="nextSlide" class="absolute right-3 md:right-6 top-[60%] md:top-1/2 transform -translate-y-1/2 z-10 glass-effect text-white p-2 md:p-4 rounded-full hover:bg-white/20 transition-all duration-300 opacity-70 md:opacity-100">
+            <i class="fas fa-chevron-right text-base md:text-xl"></i>
         </button>
         
         <!-- Slide Indicators -->
@@ -339,7 +382,6 @@
                             From humble beginnings as a small travel consultancy, we've grown into one of Nigeria's most trusted travel agencies, specializing in personalized service and competitive pricing.
                         </p>
                     </div> -->
-                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-gradient-to-br from-white to-secondary/5 p-8 rounded-3xl shadow-2xl border-l-4 border-secondary group hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2">
                             <div class="w-16 h-16 bg-gradient-to-br from-secondary to-secondary-light rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -491,29 +533,29 @@
             <!-- Main Gallery Grid -->
             <div id="main-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                 <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Santorini, Greece" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="/image/Gallery_1.JPG" alt="Santorini, Greece" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     <div class="absolute bottom-6 left-6 text-white">
-                        <h3 class="text-2xl font-bold mb-2">Santorini, Greece</h3>
-                        <p class="text-accent-light">Stunning sunsets and white architecture</p>
+                        <h3 class="text-2xl font-bold mb-2">Ibiza, Spain</h3>
+                        <p class="text-accent-light">Stunning bright skies and vibrant nightlife</p>
                     </div>
                 </div>
                 
                 <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maldives" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="/image/Gallery_2.PNG" alt="Maldives" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     <div class="absolute bottom-6 left-6 text-white">
-                        <h3 class="text-2xl font-bold mb-2">Maldives</h3>
-                        <p class="text-accent-light">Crystal clear waters and luxury resorts</p>
+                        <h3 class="text-2xl font-bold mb-2">Safari Desert, Qatar</h3>
+                        <p class="text-accent-light">Golden dunes, thrilling rides, and breathtaking sunsets</p>
                     </div>
                 </div>
                 
                 <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dubai, UAE" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="/image/Gallery_3.JPG" alt="Dubai, UAE" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     <div class="absolute bottom-6 left-6 text-white">
                         <h3 class="text-2xl font-bold mb-2">Dubai, UAE</h3>
-                        <p class="text-accent-light">Modern marvels and desert adventures</p>
+                        <p class="text-accent-light">Modern marvels and great adventures</p>
                     </div>
                 </div>
             </div>
@@ -521,11 +563,11 @@
             <!-- Extended Gallery (Hidden by default) -->
             <div id="extended-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 hidden">
                 <div class="gallery-item relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1502780402662-acc01917176e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Paris, France" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Santorini, Greece" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     <div class="absolute bottom-6 left-6 text-white">
-                        <h3 class="text-2xl font-bold mb-2">Paris, France</h3>
-                        <p class="text-accent-light">City of lights and romance</p>
+                        <h3 class="text-2xl font-bold mb-2">Santorini, Greece</h3>
+                        <p class="text-accent-light">Stunning sunsets and white architecture</p>
                     </div>
                 </div>
                 
@@ -592,7 +634,7 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Flight Reservation</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Find the best deals for domestic and international flights with our advanced search system.</p>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">We offer the best deals for domestic and international flights.</p>
             </div>
             
             <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl p-8 max-w-6xl mx-auto border border-accent/20">
@@ -713,7 +755,7 @@
                     
                     <div class="flex justify-center pt-8">
                         <button type="submit" class="bg-gradient-to-r from-secondary to-secondary-light text-white px-12 py-5 rounded-full text-xl font-bold hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 shadow-2xl pulse-glow flex items-center">
-                            <i class="fas fa-search mr-3 text-xl"></i> Search Flights
+                            <i class="fas fa-search mr-3 text-xl"></i> Book Now
                         </button>
                     </div>
                 </form>
@@ -781,6 +823,194 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gradient-to-br from-primary/5 via-accent/10 to-secondary/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">What Our Clients Say</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Hear from our satisfied customers about their amazing travel experiences with us</p>
+            </div>
+            
+            <!-- Testimonials Slider Container -->
+            <div class="relative max-w-6xl mx-auto overflow-hidden">
+                <!-- Testimonials Track -->
+                <div class="testimonials-track flex transition-transform duration-700 ease-in-out">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-slide w-full flex-shrink-0">
+                        <div class="bg-white/90 backdrop-blur-md pt-12 px-8 pb-8 md:pt-16 md:px-12 md:pb-12 rounded-3xl shadow-2xl border border-accent/20 relative mx-4">
+                            <!-- Quote Icon -->
+                            <div class="absolute -top-4 md:-top-6 left-1/2 transform -translate-x-1/2">
+                                <div class="w-12 h-12 bg-gradient-to-br from-secondary to-secondary-light rounded-full flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-quote-left text-white text-xl"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Stars -->
+                            <div class="flex justify-center mb-6 mt-4">
+                                <div class="flex text-secondary text-2xl">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial Text -->
+                            <blockquote class="text-gray-700 text-lg md:text-xl leading-relaxed text-center mb-8 italic">
+                                "Booming Place Travels made our honeymoon trip to Dubai absolutely perfect! From flight bookings to hotel reservations, everything was handled professionally. The team went above and beyond to ensure we had an unforgettable experience. Highly recommended!"
+                            </blockquote>
+                            
+                            <!-- Client Info -->
+                            <div class="flex items-center justify-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent-light rounded-full flex items-center justify-center text-white font-bold text-xl mr-4 shadow-lg">
+                                    AO
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="font-bold text-primary text-lg">Adebayo & Oluchi</h4>
+                                    <p class="text-gray-600">Honeymooners - Dubai Trip</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-slide w-full flex-shrink-0">
+                        <div class="bg-white/90 backdrop-blur-md pt-12 px-8 pb-8 md:pt-16 md:px-12 md:pb-12 rounded-3xl shadow-2xl border border-accent/20 relative mx-4">
+                            <!-- Quote Icon -->
+                            <div class="absolute -top-4 md:-top-6 left-1/2 transform -translate-x-1/2">
+                                <div class="w-12 h-12 bg-gradient-to-br from-secondary to-secondary-light rounded-full flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-quote-left text-white text-xl"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Stars -->
+                            <div class="flex justify-center mb-6 mt-4">
+                                <div class="flex text-secondary text-2xl">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial Text -->
+                            <blockquote class="text-gray-700 text-lg md:text-xl leading-relaxed text-center mb-8 italic">
+                                "As a business traveler, I need reliable and efficient service. Booming Place has been my go-to travel agency for over 3 years. Their visa assistance program helped me secure visas for multiple countries seamlessly. Excellent customer service!"
+                            </blockquote>
+                            
+                            <!-- Client Info -->
+                            <div class="flex items-center justify-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center text-white font-bold text-xl mr-4 shadow-lg">
+                                    CE
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="font-bold text-primary text-lg">Chinedu Emeka</h4>
+                                    <p class="text-gray-600">Business Traveler - Multiple Countries</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-slide w-full flex-shrink-0">
+                        <div class="bg-white/90 backdrop-blur-md pt-12 px-8 pb-8 md:pt-16 md:px-12 md:pb-12 rounded-3xl shadow-2xl border border-accent/20 relative mx-4">
+                            <!-- Quote Icon -->
+                            <div class="absolute -top-4 md:-top-6 left-1/2 transform -translate-x-1/2">
+                                <div class="w-12 h-12 bg-gradient-to-br from-secondary to-secondary-light rounded-full flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-quote-left text-white text-xl"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Stars -->
+                            <div class="flex justify-center mb-6 mt-4">
+                                <div class="flex text-secondary text-2xl">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial Text -->
+                            <blockquote class="text-gray-700 text-lg md:text-xl leading-relaxed text-center mb-8 italic">
+                                "Our family vacation to London was absolutely amazing thanks to Booming Place! They took care of everything - flights, accommodation, and even suggested great places to visit. The kids loved it and we're already planning our next trip with them!"
+                            </blockquote>
+                            
+                            <!-- Client Info -->
+                            <div class="flex items-center justify-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent-light rounded-full flex items-center justify-center text-white font-bold text-xl mr-4 shadow-lg">
+                                    IF
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="font-bold text-primary text-lg">Ibrahim Family</h4>
+                                    <p class="text-gray-600">Family Vacation - London</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-slide w-full flex-shrink-0">
+                        <div class="bg-white/90 backdrop-blur-md pt-12 px-8 pb-8 md:pt-16 md:px-12 md:pb-12 rounded-3xl shadow-2xl border border-accent/20 relative mx-4">
+                            <!-- Quote Icon -->
+                            <div class="absolute -top-4 md:-top-6 left-1/2 transform -translate-x-1/2">
+                                <div class="w-12 h-12 bg-gradient-to-br from-secondary to-secondary-light rounded-full flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-quote-left text-white text-xl"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Stars -->
+                            <div class="flex justify-center mb-6 mt-4">
+                                <div class="flex text-secondary text-2xl">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial Text -->
+                            <blockquote class="text-gray-700 text-lg md:text-xl leading-relaxed text-center mb-8 italic">
+                                "I was nervous about traveling alone for the first time, but Booming Place made everything so easy and comfortable. Their 24/7 support gave me peace of mind throughout my journey to Canada. Professional, caring, and reliable!"
+                            </blockquote>
+                            
+                            <!-- Client Info -->
+                            <div class="flex items-center justify-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center text-white font-bold text-xl mr-4 shadow-lg">
+                                    FA
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="font-bold text-primary text-lg">Fatima Abubakar</h4>
+                                    <p class="text-gray-600">Solo Traveler - Canada</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button id="prevTestimonial" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/50 backdrop-blur-sm text-primary/70 p-2 rounded-full shadow-lg hover:bg-white/80 hover:text-primary transition-all duration-300 z-10 opacity-60 hover:opacity-100">
+                    <i class="fas fa-chevron-left text-sm"></i>
+                </button>
+                <button id="nextTestimonial" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/50 backdrop-blur-sm text-primary/70 p-2 rounded-full shadow-lg hover:bg-white/80 hover:text-primary transition-all duration-300 z-10 opacity-60 hover:opacity-100">
+                    <i class="fas fa-chevron-right text-sm"></i>
+                </button>
+                
+                <!-- Testimonial Indicators -->
+                <div class="flex justify-center mt-12 space-x-3">
+                    <button class="testimonial-indicator w-4 h-4 rounded-full bg-secondary/50 hover:bg-secondary transition-all duration-300 active-indicator"></button>
+                    <button class="testimonial-indicator w-4 h-4 rounded-full bg-secondary/50 hover:bg-secondary transition-all duration-300"></button>
+                    <button class="testimonial-indicator w-4 h-4 rounded-full bg-secondary/50 hover:bg-secondary transition-all duration-300"></button>
+                    <button class="testimonial-indicator w-4 h-4 rounded-full bg-secondary/50 hover:bg-secondary transition-all duration-300"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gradient-to-br from-gray-50 via-accent/5 to-secondary/5">
         <div class="container mx-auto px-4">
@@ -789,70 +1019,70 @@
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Find us at our Lagos office or get in touch through various channels</p>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
                 <div>
-                    <div class="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-accent/20">
-                        <h3 class="text-3xl font-bold text-primary mb-8">Get In Touch</h3>
+                    <div class="bg-white/80 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-2xl border border-accent/20">
+                        <h3 class="text-2xl md:text-3xl font-bold text-primary mb-6 md:mb-8">Get In Touch</h3>
                         
                         <div class="space-y-8">
                             <div class="flex items-start group">
-                                <div class="w-14 h-14 bg-gradient-to-br from-secondary to-secondary-light rounded-2xl flex items-center justify-center text-white mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-secondary to-secondary-light rounded-2xl flex items-center justify-center text-white mr-4 md:mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg flex-shrink-0">
                                     <i class="fas fa-map-marker-alt text-xl"></i>
                                 </div>
-                                <div>
+                                <div class="min-w-0 flex-1">
                                     <h4 class="font-bold text-xl text-primary mb-2">Address</h4>
-                                    <p class="text-gray-600 text-lg">Unity Estate, 1 Joseph Orru Street, Amuwo-origin GRA, Lagos.</p>
+                                    <p class="text-gray-600 text-base md:text-lg break-words">Unity Estate, 1 Joseph Orru Street, Amuwo-origin GRA, Lagos.</p>
                                 </div>
                             </div>
                             
                             <div class="flex items-start group">
-                                <div class="w-14 h-14 bg-gradient-to-br from-accent to-accent-light rounded-2xl flex items-center justify-center text-white mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-accent to-accent-light rounded-2xl flex items-center justify-center text-white mr-4 md:mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg flex-shrink-0">
                                     <i class="fas fa-phone-alt text-xl"></i>
                                 </div>
-                                <div>
+                                <div class="min-w-0 flex-1">
                                     <h4 class="font-bold text-xl text-primary mb-2">Phone</h4>
-                                    <p class="text-gray-600 text-lg"><a href="tel:+2349065212188" class="text-gray-600">+234 906 521 2188</a></p>   
+                                    <p class="text-gray-600 text-base md:text-lg"><a href="tel:+2349065212188" class="text-gray-600 break-words">+234 906 521 2188</a></p>   
                                     
                                 </div>
                             </div>
                             
                             <div class="flex items-start group">
-                                <div class="w-14 h-14 bg-gradient-to-br from-primary to-primary-light rounded-2xl flex items-center justify-center text-white mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-primary to-primary-light rounded-2xl flex items-center justify-center text-white mr-4 md:mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg flex-shrink-0">
                                     <i class="fas fa-envelope text-xl"></i>
                                 </div>
-                                <div>
+                                <div class="min-w-0 flex-1">
                                     <h4 class="font-bold text-xl text-primary mb-2">Email</h4>
-                                    <p class="text-gray-600 text-lg"><a href="mailto:info@boomingplacetravelsandtours.com" class="text-gray-600">info@boomingplacetravelsandtours.com</a></p>
+                                    <p class="text-gray-600 text-base md:text-lg leading-snug"><a href="mailto:info@boomingplacetravelsandtours.com" class="text-gray-600 break-all md:break-words">info@boomingplacetravelsandtours.com</a></p>
                                 </div>
                             </div>
                             
                             <div class="flex items-start group">
-                                <div class="w-14 h-14 bg-gradient-to-br from-secondary to-accent rounded-2xl flex items-center justify-center text-white mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-secondary to-accent rounded-2xl flex items-center justify-center text-white mr-4 md:mr-6 mt-1 group-hover:scale-110 transition-transform duration-300 shadow-lg flex-shrink-0">
                                     <i class="fas fa-clock text-xl"></i>
                                 </div>
-                                <div>
+                                <div class="min-w-0 flex-1">
                                     <h4 class="font-bold text-xl text-primary mb-2">Business Hours</h4>
-                                    <p class="text-gray-600 text-lg">Monday - Friday: 8:00 AM - 6:00 PM</p>
-                                    <p class="text-gray-600 text-lg">Saturday: 9:00 AM - 4:00 PM</p>
+                                    <p class="text-gray-600 text-base md:text-lg">Monday - Friday: 8:00 AM - 6:00 PM</p>
+                                    <p class="text-gray-600 text-base md:text-lg">Saturday: 9:00 AM - 4:00 PM</p>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="mt-10">
                             <h4 class="font-bold text-xl text-primary mb-6">Follow Us</h4>
-                            <div class="flex space-x-4">
-                                <a href="https://web.facebook.com/people/Boomingplace-travels-and-tour/100064488411169/" class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
+                            <div class="flex flex-wrap gap-3 sm:gap-4">
+                                <a href="https://web.facebook.com/people/Boomingplace-travels-and-tour/100064488411169/" class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="#" class="w-12 h-12 bg-gradient-to-br from-gray-800 to-black rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
+                                <a href="#" class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-gray-800 to-black rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                                     </svg>
                                 </a>
-                                <a href="https://www.instagram.com/boomingplace/" class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
+                                <a href="https://www.instagram.com/boomingplace/" class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
                                     <i class="fab fa-instagram"></i>
                                 </a>
-                                <a href="#" class="w-12 h-12 bg-gradient-to-br from-blue-700 to-blue-800 rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
+                                <a href="#" class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-700 to-blue-800 rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
                             </div>
@@ -861,24 +1091,22 @@
                 </div>
                 
                 <div>
-                    <div class="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl h-full border border-accent/20">
-                        <h3 class="text-3xl font-bold text-primary mb-8 text-center">Our Location</h3>
+                    <div class="bg-white/80 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-2xl h-full border border-accent/20">
+                        <h3 class="text-2xl md:text-3xl font-bold text-primary mb-6 md:mb-8 text-center">Our Location</h3>
                         
                         <!-- Google Map Embed -->
-                        <div class="w-full h-96 rounded-2xl overflow-hidden shadow-lg mb-6">
-
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.408000886021!2d3.300513374752765!3d6.469889993521823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b89266e561c1d%3A0x4a26f958084fae58!2sBooming%20Place%20Travels%20%26%20Tours%20Ltd!5e0!3m2!1sen!2sng!4v1759540245737!5m2!1sen!2sng" 
-                                 width="600" 
-                                 height="450" 
-                                 style="border:0;" 
-                                 allowfullscreen="" 
-                                 loading="lazy" 
-                                 referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
+                        <div class="relative w-full h-64 md:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-lg mb-6">
+                            <iframe class="absolute inset-0 w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.408000886021!2d3.300513374752765!3d6.469889993521823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b89266e561c1d%3A0x4a26f958084fae58!2sBooming%20Place%20Travels%20%26%20Tours%20Ltd!5e0!3m2!1sen!2sng!4v1759540245737!5m2!1sen!2sng" 
+                                    width="100%" 
+                                    height="100%" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                         
                         <!-- Quick Contact Actions -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                             <a href="tel:+2349065212188" class="bg-gradient-to-r from-secondary to-secondary-light text-white p-4 rounded-xl text-center font-semibold hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center">
                                 <i class="fas fa-phone mr-3"></i>Call Us Now
                             </a>
@@ -889,7 +1117,7 @@
                         
                         <!-- Get Directions Button -->
                         <div class="mt-6">
-                            <a href="https://maps.app.goo.gl/QrzNZjQV6VX7TmjdA" target="_blank" class="bg-gradient-to-r from-primary to-primary-light text-white px-6 py-4 rounded-xl font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:scale-105 shadow-lg w-full flex items-center justify-center">
+                            <a href="https://maps.app.goo.gl/QrzNZjQV6VX7TmjdA" target="_blank" class="bg-gradient-to-r from-primary to-primary-light text-white px-5 py-3 md:px-6 md:py-4 rounded-xl font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:scale-105 shadow-lg w-full flex items-center justify-center">
                                 <i class="fas fa-directions mr-3"></i>Get Directions
                             </a>
                         </div>
@@ -905,8 +1133,8 @@
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
             <p class="text-xl max-w-2xl mx-auto mb-8">Let us help you plan the perfect trip. Contact us today for personalized travel solutions.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button class="bg-secondary text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-opacity-90 transition">Book a Consultation</button>
-                <button class="bg-white text-primary px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition">Call Now</button>
+                <a href="https://wa.me/2349065212188?text=Hello%20Booming%20Place%20Travels!%20I%20would%20like%20to%20book%20a%20consultation.%0A%0AName:%20%0APreferred%20Travel%20Date(s):%20%0ADeparture%20City:%20%0ADestination:%20%0APurpose%20of%20Travel%20(Tour/Business/Study/Family):%20%0ABudget%20Range:%20%0AAdditional%20Notes:%20" target="_blank" rel="noopener" class="bg-secondary text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-opacity-90 transition text-center">Book a Consultation</a>
+                <a href="tel:+2349065212188" class="bg-white text-primary px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition text-center">Call Now</a>
             </div>
         </div>
     </section>
@@ -1104,6 +1332,107 @@
                     }
                 });
             });
+            
+            // Testimonials Slider Functionality
+            const testimonialsTrack = document.querySelector('.testimonials-track');
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            const testimonialIndicators = document.querySelectorAll('.testimonial-indicator');
+            const prevTestimonialBtn = document.getElementById('prevTestimonial');
+            const nextTestimonialBtn = document.getElementById('nextTestimonial');
+            let currentTestimonial = 0;
+            let testimonialInterval;
+            let isTransitioning = false;
+            
+            function showTestimonial(n) {
+                if (!testimonialsTrack || testimonialSlides.length === 0) return;
+                // Update current testimonial index
+                currentTestimonial = (n + testimonialSlides.length) % testimonialSlides.length;
+
+                // Move the track by exact slide width in pixels (one slide per view)
+                const container = document.querySelector('#testimonials .relative.max-w-6xl.mx-auto.overflow-hidden');
+                const slideWidth = container ? container.clientWidth : (testimonialsTrack?.parentElement?.clientWidth || testimonialSlides[0]?.clientWidth || 0);
+                const translateX = -(currentTestimonial * slideWidth);
+                testimonialsTrack.style.transform = `translateX(${translateX}px)`;
+                
+                // Update indicators
+                testimonialIndicators.forEach((indicator, index) => {
+                    if (index === currentTestimonial) {
+                        indicator.classList.add('active-indicator');
+                        indicator.classList.remove('bg-secondary/50');
+                        indicator.classList.add('bg-secondary');
+                    } else {
+                        indicator.classList.remove('active-indicator');
+                        indicator.classList.remove('bg-secondary');
+                        indicator.classList.add('bg-secondary/50');
+                    }
+                });
+            }
+            
+            function nextTestimonial() {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                showTestimonial(currentTestimonial + 1);
+                setTimeout(() => { isTransitioning = false; }, 750); // slightly > CSS duration-700
+            }
+            
+            function prevTestimonial() {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                showTestimonial(currentTestimonial - 1);
+                setTimeout(() => { isTransitioning = false; }, 750);
+            }
+            
+            // Auto slide functionality for testimonials
+            function startTestimonialAutoSlide() {
+                clearInterval(testimonialInterval);
+                testimonialInterval = setInterval(nextTestimonial, 6000);
+            }
+            
+            function stopTestimonialAutoSlide() {
+                clearInterval(testimonialInterval);
+            }
+            
+            // Event listeners for testimonials
+            if (nextTestimonialBtn && prevTestimonialBtn) {
+                nextTestimonialBtn.addEventListener('click', () => {
+                    nextTestimonial();
+                    stopTestimonialAutoSlide();
+                    startTestimonialAutoSlide(); // Restart auto slide
+                });
+                
+                prevTestimonialBtn.addEventListener('click', () => {
+                    prevTestimonial();
+                    stopTestimonialAutoSlide();
+                    startTestimonialAutoSlide(); // Restart auto slide
+                });
+            }
+            
+            // Indicator controls for testimonials
+            testimonialIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    showTestimonial(index);
+                    stopTestimonialAutoSlide();
+                    startTestimonialAutoSlide(); // Restart auto slide
+                    setTimeout(() => { isTransitioning = false; }, 750);
+                });
+            });
+            
+            // Initialize testimonials slider
+            if (testimonialSlides.length > 0) {
+                showTestimonial(0);
+                startTestimonialAutoSlide();
+                // Recalculate position on resize to keep slides aligned
+                window.addEventListener('resize', () => showTestimonial(currentTestimonial));
+            }
+            
+            // Pause testimonials auto-slide on hover
+            const testimonialsSection = document.getElementById('testimonials');
+            if (testimonialsSection) {
+                testimonialsSection.addEventListener('mouseenter', stopTestimonialAutoSlide);
+                testimonialsSection.addEventListener('mouseleave', startTestimonialAutoSlide);
+            }
             
             // Flight Reservation Functionality
             const localTab = document.getElementById('local-tab');
@@ -1528,6 +1857,7 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const menuIcon = document.getElementById('menu-icon');
             const mobileNavLinks = document.querySelectorAll('#mobile-menu nav a');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
             
             let isMenuOpen = false;
             
@@ -1551,6 +1881,9 @@
             
             // Toggle menu when button is clicked
             mobileMenuButton.addEventListener('click', toggleMobileMenu);
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', toggleMobileMenu);
+            }
             
             // Close menu when clicking on navigation links
             mobileNavLinks.forEach(link => {
