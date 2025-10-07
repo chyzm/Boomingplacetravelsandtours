@@ -263,7 +263,7 @@
 </head>
 <body class="font-poppins">
     <!-- Header/Navigation -->
-    <header class="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-accent/20">
+    <header class="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-[100000] border-b border-accent/20">
         <div class="container mx-auto px-4 py-1 flex justify-between items-center">
             <div class="flex items-center">
                                 <a href="home.html">
@@ -296,13 +296,17 @@
             </button>
         </div>
         
-        <!-- Mobile Navigation Menu -->
-    <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white bg-opacity-100 z-[1000] transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl">
+    </header>
+
+    <!-- Mobile Navigation Menu (moved outside header for reliable overlay) -->
+    <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white bg-opacity-100 z-[2147483647] transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl isolate">
+            <!-- Solid background layer to prevent any bleed-through -->
+            <div class="absolute inset-0 bg-white opacity-100 pointer-events-none"></div>
             <!-- In-overlay Close Button -->
-            <button id="mobile-menu-close" class="absolute top-4 right-4 text-primary p-3 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-secondary z-[1100]" aria-label="Close menu">
+            <button id="mobile-menu-close" class="absolute top-4 right-4 text-primary p-3 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-secondary z-20" aria-label="Close menu">
                 <i class="fas fa-times text-2xl"></i>
             </button>
-            <div class="flex flex-col h-full pt-20 px-6">
+            <div class="flex flex-col h-full pt-20 px-6 relative z-10">
                 <nav class="flex flex-col space-y-4 mb-8">
                     <a href="#home" class="text-primary font-semibold text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Home</a>
                     <a href="#about" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">About</a>
@@ -316,12 +320,11 @@
                 <button id="mobile-book-now" class="bg-gradient-to-r from-secondary to-secondary-light text-white px-8 py-4 rounded-full hover:from-secondary-light hover:to-secondary transition-all duration-300 transform hover:scale-105 font-semibold shadow-lg pulse-glow text-lg">Book Now</button>
             </div>
         </div>
-    </header>
 
     <!-- Hero Section -->
     <section id="home" class="relative h-screen overflow-hidden">
         <!-- Hero Slides -->
-        <div class="absolute inset-0">
+        <div class="absolute inset-0 z-0">
             <div class="hero-slide active bg-cover bg-center" style="background-image: url('image/hero_1.jpg')">
                 <div class="absolute inset-0 gradient-overlay"></div>
             </div>
@@ -354,7 +357,7 @@
         </button>
         
         <!-- Slide Indicators -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex space-x-4">
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-0 flex space-x-4">
             <button class="slide-indicator w-4 h-4 rounded-full bg-white/70 hover:bg-white transition-all duration-300 active border-2 border-secondary"></button>
             <button class="slide-indicator w-4 h-4 rounded-full bg-white/70 hover:bg-white transition-all duration-300 border-2 border-transparent"></button>
             <button class="slide-indicator w-4 h-4 rounded-full bg-white/70 hover:bg-white transition-all duration-300 border-2 border-transparent"></button>
@@ -429,7 +432,7 @@
                                  class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105">
                             <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
                             <div class="absolute bottom-6 left-6 text-white">
-                                <h4 class="text-2xl font-bold mb-5 ml-5">Professional Travel Experts</h4>
+                                <h4 class="text-2xl font-bold" style="margin-bottom: 3rem;">Professional Travel Experts</h4>
                                 <!-- <p class="text-accent-light">Dedicated to making your journey extraordinary</p> -->
                             </div>
                         </div>
