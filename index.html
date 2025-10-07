@@ -646,13 +646,15 @@
                     <button id="international-tab" class="flight-tab py-4 px-8 font-semibold text-gray-500 text-lg hover:text-primary transition-all duration-300">International Flights</button>
                 </div>
                 
-                <form class="space-y-8">
+                <form class="space-y-8" action="send_booking.php" method="POST">
+                    <!-- Hidden input to capture Local/International flight scope -->
+                    <input type="hidden" id="flight-scope" name="flight_scope" value="Local">
                     <!-- Trip Type Row -->
                     <div class="bg-gradient-to-r from-primary/5 to-accent/5 p-6 rounded-2xl">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
                                 <label class="block text-primary font-semibold mb-3 text-lg">Trip Type</label>
-                                <select id="trip-type" class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                                <select id="trip-type" name="trip_type" class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
                                     <option value="roundtrip">Round Trip</option>
                                     <option value="oneway">One Way</option>
                                 </select>
@@ -667,7 +669,7 @@
                                 <i class="fas fa-plane-departure text-secondary mr-2"></i>From
                             </label>
                             <div class="relative">
-                                <input type="text" id="from-input" placeholder="Enter departure city or airport" 
+                    <input type="text" id="from-input" name="from" placeholder="Enter departure city or airport" 
                                        class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg pl-12">
                                 <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                                 <div id="from-suggestions" class="absolute z-20 w-full bg-white border-2 border-accent/30 rounded-xl mt-2 hidden max-h-60 overflow-y-auto shadow-2xl"></div>
@@ -679,7 +681,7 @@
                                 <i class="fas fa-plane-arrival text-secondary mr-2"></i>To
                             </label>
                             <div class="relative">
-                                <input type="text" id="to-input" placeholder="Enter destination city or airport" 
+                    <input type="text" id="to-input" name="to" placeholder="Enter destination city or airport" 
                                        class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg pl-12">
                                 <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                                 <div id="to-suggestions" class="absolute z-20 w-full bg-white border-2 border-accent/30 rounded-xl mt-2 hidden max-h-60 overflow-y-auto shadow-2xl"></div>
@@ -693,14 +695,14 @@
                             <label class="block text-primary font-semibold text-lg flex items-center">
                                 <i class="fas fa-calendar-alt text-secondary mr-2"></i>Departure Date
                             </label>
-                            <input type="date" id="departure-date" class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                            <input type="date" id="departure-date" name="departure_date" class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
                         </div>
                         
                         <div id="return-date-field" class="space-y-3">
                             <label class="block text-primary font-semibold text-lg flex items-center">
                                 <i class="fas fa-calendar-check text-secondary mr-2"></i>Return Date
                             </label>
-                            <input type="date" id="return-date" class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                            <input type="date" id="return-date" name="return_date" class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
                         </div>
                     </div>
                     
@@ -711,7 +713,7 @@
                                 <label class="block text-primary font-semibold text-lg flex items-center">
                                     <i class="fas fa-user text-secondary mr-2"></i>Adults
                                 </label>
-                                <input type="number" id="adults" min="1" max="9" value="1" 
+                    <input type="number" id="adults" name="adults" min="1" max="9" value="1" 
                                        class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
                             </div>
                             
@@ -719,7 +721,7 @@
                                 <label class="block text-primary font-semibold text-lg flex items-center">
                                     <i class="fas fa-child text-secondary mr-2"></i>Children (2-12 years)
                                 </label>
-                                <input type="number" id="children" min="0" max="9" value="0" 
+                    <input type="number" id="children" name="children" min="0" max="9" value="0" 
                                        class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
                             </div>
                             
@@ -727,7 +729,7 @@
                                 <label class="block text-primary font-semibold text-lg flex items-center">
                                     <i class="fas fa-star text-secondary mr-2"></i>Class
                                 </label>
-                                <select class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
+                                <select id="travel-class" name="travel_class" class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
                                     <option>Economy</option>
                                     <option>Premium Economy</option>
                                     <option>Business</option>
@@ -743,7 +745,7 @@
                             <label class="block text-primary font-semibold text-lg flex items-center">
                                 <i class="fas fa-phone text-secondary mr-2"></i>Phone Number
                             </label>
-                            <input type="tel" placeholder="+234 XXX XXX XXXX" 
+                <input type="tel" id="phone-number" name="phone" placeholder="+234 XXX XXX XXXX" 
                                    class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
                         </div>
                         
@@ -751,7 +753,7 @@
                             <label class="block text-primary font-semibold text-lg flex items-center">
                                 <i class="fas fa-clipboard-list text-secondary mr-2"></i>Additional Requirements
                             </label>
-                            <input type="text" placeholder="Special meals, wheelchair assistance, etc." 
+                <input type="text" id="additional-requirements" name="additional_requirements" placeholder="Special meals, wheelchair assistance, etc." 
                                    class="w-full p-4 border-2 border-accent/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-secondary/30 focus:border-secondary transition-all duration-300 bg-white text-lg">
                         </div>
                     </div>
@@ -1588,6 +1590,9 @@
                 fromInput.value = '';
                 toInput.value = '';
                 hideSuggestions();
+                // Update hidden flight scope
+                const flightScope = document.getElementById('flight-scope');
+                if (flightScope) flightScope.value = 'Local';
             }
             
             function switchToInternational() {
@@ -1601,6 +1606,9 @@
                 fromInput.value = '';
                 toInput.value = '';
                 hideSuggestions();
+                // Update hidden flight scope
+                const flightScope = document.getElementById('flight-scope');
+                if (flightScope) flightScope.value = 'International';
             }
             
             localTab.addEventListener('click', switchToLocal);
@@ -1608,10 +1616,18 @@
             
             // Trip Type functionality
             tripTypeSelect.addEventListener('change', function() {
+                const returnDateInput = document.getElementById('return-date');
                 if (this.value === 'oneway') {
                     returnDateField.style.display = 'none';
+                    if (returnDateInput) {
+                        returnDateInput.value = '';
+                        returnDateInput.disabled = true;
+                    }
                 } else {
                     returnDateField.style.display = 'block';
+                    if (returnDateInput) {
+                        returnDateInput.disabled = false;
+                    }
                 }
             });
             
@@ -1910,6 +1926,50 @@
                     toggleMobileMenu();
                 }
             });
+
+            // Booking form status toast (success/error)
+            function showStatusToast(type, message) {
+                const isSuccess = type === 'success';
+                const toast = document.createElement('div');
+                toast.className = `fixed top-6 left-1/2 -translate-x-1/2 z-[2147483647] max-w-md w-[92%] md:w-auto px-4 py-3 rounded-xl shadow-2xl border flex items-center gap-3 backdrop-blur-sm ${isSuccess ? 'bg-white border-green-200' : 'bg-white border-red-200'}`;
+                toast.innerHTML = `
+                    <div class="flex items-center justify-center w-9 h-9 rounded-full ${isSuccess ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}">
+                        <i class="fas ${isSuccess ? 'fa-check' : 'fa-times'}"></i>
+                    </div>
+                    <div class="text-sm">
+                        <div class="font-semibold ${isSuccess ? 'text-green-700' : 'text-red-700'}">${isSuccess ? 'Request Sent' : 'Submission Failed'}</div>
+                        <div class="text-gray-600">${message}</div>
+                    </div>
+                    <button aria-label="Close" class="ml-auto text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                document.body.appendChild(toast);
+
+                const closeBtn = toast.querySelector('button');
+                const remove = () => {
+                    if (!toast.parentNode) return;
+                    toast.style.transition = 'opacity 300ms ease';
+                    toast.style.opacity = '0';
+                    setTimeout(() => toast.remove(), 320);
+                };
+                closeBtn.addEventListener('click', remove);
+                setTimeout(remove, 6000);
+            }
+
+            // Read ?status and show toast, then remove param from URL
+            const params = new URLSearchParams(window.location.search);
+            const status = params.get('status');
+            if (status === 'success') {
+                showStatusToast('success', 'Thank you! Your flight request has been received. Our team will contact you shortly.');
+            } else if (status === 'error') {
+                showStatusToast('error', 'We couldn\'t send your request at the moment. Please try again or contact support.');
+            }
+            if (status) {
+                const url = new URL(window.location.href);
+                url.searchParams.delete('status');
+                window.history.replaceState({}, document.title, url.toString());
+            }
         });
     </script>
     
