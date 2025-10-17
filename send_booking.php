@@ -40,10 +40,10 @@ if (!empty($errors)) {
     exit;
 }
 
-// Build HTML email (aesthetic)
-$brandPrimary = '#0f172a';
-$brandAccent = '#12b981';
-$brandSecondary = '#38bdf8';
+// Build HTML email
+$brandPrimary = '#12b981';   // green
+$brandSecondary = '#f59e0b'; // warm yellow (mid)
+$brandAccent = '#ef4444';    // red (end)
 $bg = '#f6f9fc';
 $cardBg = '#ffffff';
 $muted = '#64748b';
