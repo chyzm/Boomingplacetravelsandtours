@@ -266,7 +266,7 @@
     <header class="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-[100000] border-b border-accent/20">
         <div class="container mx-auto px-4 py-1 flex justify-between items-center">
             <div class="flex items-center">
-                                <a href="home.html">
+                                <a href="index.html">
                                     <img src="image/logo.png" alt="Booming Place Logo" class="w-20 h-24 md:w-24 md:h-28 mr-3 object-contain">
                                 </a>
                 <div class="flex flex-col">
@@ -281,6 +281,7 @@
                 <a href="#home" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Home</a>
                 <a href="#about" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">About</a>
                 <a href="#services" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Services</a>
+                <a href="#packages" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Packages</a>
                 <a href="#flights" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Flights</a>
                 <a href="#gallery" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Gallery</a>
                 <a href="#contact" class="text-gray-700 font-medium hover:text-secondary transition-all duration-300 hover:border-b-2 hover:border-secondary pb-1">Contact</a>
@@ -312,6 +313,7 @@
                     <a href="#home" class="text-primary font-semibold text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Home</a>
                     <a href="#about" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">About</a>
                     <a href="#services" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Services</a>
+                    <a href="#packages" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Packages</a>
                     <a href="#flights" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Flights</a>
                     <a href="#gallery" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Gallery</a>
                     <a href="#contact" class="text-primary font-medium text-lg hover:text-secondary transition-colors duration-300 border-b border-gray-200 pb-3">Contact</a>
@@ -522,6 +524,68 @@
                     <h3 class="text-2xl font-bold text-primary mb-4">Travel Insurance</h3>
                     <p class="text-gray-600 text-lg leading-relaxed">Comprehensive coverage to protect you and your investment during your travels.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tour Packages Section -->
+    <section id="packages" class="py-20 bg-gradient-to-br from-primary/5 via-white to-accent/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Tour Packages</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Upcoming group trips, starting with our next departure. Tap any flyer to view it full size.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- 1. 2nd - 9th November 2026 -->
+                <button type="button" class="tour-flyer group relative block w-full aspect-[2/3] rounded-3xl overflow-hidden bg-white shadow-2xl border border-accent/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-secondary/40"
+                        data-flyer="image/tour_qatar_rwanda.jpg"
+                        aria-label="View the Qatar and Rwanda group trip flyer — 2nd to 9th November 2026">
+                    <img src="image/tour_qatar_rwanda.jpg" alt="Qatar and Rwanda group trip — 2nd to 9th November 2026" loading="lazy"
+                         class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105">
+                </button>
+
+                <!-- 2. 2nd - 12th November 2026 -->
+                <button type="button" class="tour-flyer group relative block w-full aspect-[2/3] rounded-3xl overflow-hidden bg-white shadow-2xl border border-accent/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-secondary/40"
+                        data-flyer="image/tour_qatar_kenya_rwanda.jpg"
+                        aria-label="View the Qatar, Kenya and Rwanda flyer — 2nd to 12th November 2026">
+                    <img src="image/tour_qatar_kenya_rwanda.jpg" alt="Qatar, Kenya and Rwanda 11-day group trip — 2nd to 12th November 2026" loading="lazy"
+                         class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105">
+                </button>
+
+                <!-- 3. 16th - 21st November 2026 -->
+                <button type="button" class="tour-flyer group relative block w-full aspect-[2/3] rounded-3xl overflow-hidden bg-white shadow-2xl border border-accent/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-secondary/40"
+                        data-flyer="image/tour_zanzibar.jpg"
+                        aria-label="View the Zanzibar Luxury Getaway flyer — 16th to 21st November 2026">
+                    <img src="image/tour_zanzibar.jpg" alt="Zanzibar Luxury Getaway — 16th to 21st November 2026" loading="lazy"
+                         class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105">
+                </button>
+
+                <!-- 4. 20th - 27th December 2026 -->
+                <button type="button" class="tour-flyer group relative block w-full aspect-[2/3] rounded-3xl overflow-hidden bg-white shadow-2xl border border-accent/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-secondary/40"
+                        data-flyer="image/tour_christmas_jordan.jpg"
+                        aria-label="View the Christmas in Jordan flyer — 20th to 27th December 2026">
+                    <img src="image/tour_christmas_jordan.jpg" alt="Christmas in Jordan, exploring 5 cities — 20th to 27th December 2026" loading="lazy"
+                         class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105">
+                </button>
+
+                <!-- 5. 22nd - 28th December 2026 -->
+                <button type="button" class="tour-flyer group relative block w-full aspect-[2/3] rounded-3xl overflow-hidden bg-white shadow-2xl border border-accent/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-secondary/40"
+                        data-flyer="image/tour_christmas_qatar.jpg"
+                        aria-label="View the Christmas in Qatar flyer — 22nd to 28th December 2026">
+                    <img src="image/tour_christmas_qatar.jpg" alt="Christmas in Qatar group trip — 22nd to 28th December 2026" loading="lazy"
+                         class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105">
+                </button>
+
+                <!-- 6. 23rd - 28th December 2026 -->
+                <button type="button" class="tour-flyer group relative block w-full aspect-[2/3] rounded-3xl overflow-hidden bg-white shadow-2xl border border-accent/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 focus:outline-none focus:ring-4 focus:ring-secondary/40"
+                        data-flyer="image/tour_christmas_rwanda.jpg"
+                        aria-label="View the Christmas in Rwanda flyer — 23rd to 28th December 2026">
+                    <img src="image/tour_christmas_rwanda.jpg" alt="Christmas in Rwanda — 23rd to 28th December 2026" loading="lazy"
+                         class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105">
+                </button>
+
             </div>
         </div>
     </section>
@@ -1618,7 +1682,42 @@
             
             localTab.addEventListener('click', switchToLocal);
             internationalTab.addEventListener('click', switchToInternational);
-            
+
+            // Tour Packages: flyer lightbox
+            const tourLightbox = document.getElementById('tour-lightbox');
+            const tourLightboxImg = document.getElementById('tour-lightbox-img');
+            const tourLightboxClose = document.getElementById('tour-lightbox-close');
+
+            function closeTourLightbox() {
+                if (!tourLightbox) return;
+                tourLightbox.classList.add('hidden');
+                tourLightbox.classList.remove('flex');
+                tourLightboxImg.src = '';
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('.tour-flyer').forEach(function (flyer) {
+                flyer.addEventListener('click', function () {
+                    if (!tourLightbox) return;
+                    const thumb = this.querySelector('img');
+                    tourLightboxImg.src = this.dataset.flyer;
+                    tourLightboxImg.alt = thumb ? thumb.alt : 'Tour package flyer';
+                    tourLightbox.classList.remove('hidden');
+                    tourLightbox.classList.add('flex');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            if (tourLightbox) {
+                tourLightbox.addEventListener('click', function (e) {
+                    if (e.target === tourLightbox) closeTourLightbox();
+                });
+            }
+            if (tourLightboxClose) tourLightboxClose.addEventListener('click', closeTourLightbox);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeTourLightbox();
+            });
+
             // Trip Type functionality
             tripTypeSelect.addEventListener('change', function() {
                 const returnDateInput = document.getElementById('return-date');
@@ -1715,7 +1814,7 @@
             
             // Navigation scroll highlighting
             function updateActiveNavigation() {
-                const sections = ['home', 'about', 'services', 'flights', 'gallery', 'contact'];
+                const sections = ['home', 'about', 'services', 'packages', 'flights', 'gallery', 'contact'];
                 const desktopNavLinks = document.querySelectorAll('nav.hidden a'); // Desktop nav only
                 const mobileNavLinks = document.querySelectorAll('#mobile-menu nav a'); // Mobile nav only
                 let currentSection = 'home';
@@ -1978,6 +2077,14 @@
         });
     </script>
     
+    <!-- Tour Flyer Lightbox -->
+    <div id="tour-lightbox" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-[2147483646] hidden items-center justify-center p-4">
+        <button id="tour-lightbox-close" class="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/25 text-white rounded-full flex items-center justify-center transition-all duration-300" aria-label="Close flyer">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <img id="tour-lightbox-img" src="" alt="" class="max-h-[92vh] max-w-full object-contain rounded-2xl shadow-2xl">
+    </div>
+
     <!-- WhatsApp Chat Integration -->
     <div id="whatsapp-chat" class="fixed bottom-6 right-6 z-50">
         <a href="https://wa.me/2349065212188?text=Hello%20Booming%20Place%20Travels!%20I%20would%20like%20to%20inquire%20about%20your%20travel%20services." 
